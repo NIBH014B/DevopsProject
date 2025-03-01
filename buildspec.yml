@@ -12,10 +12,13 @@ phases:
       - docker tag loginpage:latest 954976317673.dkr.ecr.eu-north-1.amazonaws.com/loginpage:latest
   post_build:
     commands:
-      - echo Pushing the Docker image...
-      - docker push 954976317673.dkr.ecr.eu-north-1.amazonaws.com/mloginpage:latest
-      - echo Writing image definitions...
-      - printf '[{"name":"loginpage","imageUri":"%s"}]' 954976317673.dkr.ecr.eu-north-1.amazonaws.com/loginpage:latest > imagedefinitions.json
+      - echo "Building Docker image..."
+      - docker build -t loginpage .
+      - echo "Tagging Docker image..."
+      - docker tag loginpage:latest 954976317673.dkr.ecr.eu-north-1.amazonaws.com/loginpage:latest
+      - echo "Listing Docker images to confirm tag..."
+      - docker images
+
 artifacts:
   files:
     - imagedefinitions.json
