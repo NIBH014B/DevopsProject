@@ -8,14 +8,14 @@ phases:
   build:
     commands:
       - echo Building Docker image...
-      - docker build -t my-html-app .
-      - docker tag my-html-app:latest 954976317673.dkr.ecr.eu-north-1.amazonaws.com/my-html-app:latest
+      - docker build -t loginpage .
+      - docker tag loginpage:latest 954976317673.dkr.ecr.eu-north-1.amazonaws.com/loginpage:latest
   post_build:
     commands:
       - echo Pushing the Docker image...
-      - docker push 954976317673.dkr.ecr.eu-north-1.amazonaws.com/my-html-app:latest
+      - docker push 954976317673.dkr.ecr.eu-north-1.amazonaws.com/mloginpage:latest
       - echo Writing image definitions...
-      - printf '[{"name":"my-html-app","imageUri":"%s"}]' 954976317673.dkr.ecr.eu-north-1.amazonaws.com/my-html-app:latest > imagedefinitions.json
+      - printf '[{"name":"loginpage","imageUri":"%s"}]' 954976317673.dkr.ecr.eu-north-1.amazonaws.com/loginpage:latest > imagedefinitions.json
 artifacts:
   files:
     - imagedefinitions.json
